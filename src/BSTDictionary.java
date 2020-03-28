@@ -8,12 +8,15 @@
  *
  */
 public class BSTDictionary<E, K extends Sortable> implements Dictionary {
+	BSTNode<String, SortableString> root;
+	BSTNode<String, SortableString> currNode;
 
 	/**
 	 * 
 	 */
-	public BSTDictionary() {
+	public BSTDictionary(BSTNode<String, SortableString> root) {
 		// TODO Auto-generated constructor stub
+		this.root = root;
 	}
 
 	/**
@@ -33,19 +36,19 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	@Override
 	public void insert(Sortable key, Object element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Sortable key) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void printTree() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
