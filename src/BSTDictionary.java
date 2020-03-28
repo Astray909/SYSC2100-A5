@@ -11,6 +11,12 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	BSTNode<String, SortableString> root;
 	BSTNode<String, SortableString> currNode;
 
+	
+	public BSTDictionary()
+	{
+		root = null;
+	}
+	
 	/**
 	 * 
 	 */
