@@ -29,7 +29,26 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 
 	@Override
 	public Object search(Sortable key) {
-		// TODO Auto-generated method stub
+		if(currNode != null)
+		{
+			if(currNode.getKey().compareTo(key) == 0)
+			{
+				String str = (String) currNode.getElement();
+				currNode = root;
+				return str;
+			}
+			else if (key.compareTo(currNode.getKey()) < 0)
+			{
+				currNode = currNode.getLeft();
+				return search(key);
+			}
+			else
+			{
+				currNode=currNode.getRight();
+				return search(key);
+			}
+		}
+		currNode = root;
 		return null;
 	}
 
