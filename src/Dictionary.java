@@ -3,24 +3,23 @@
  */
 
 /**
- * @author Justi
+ * @author Jia Chen Huang
+ * @version March 27, 2020
  *
  */
-public class Dictionary {
+public interface Dictionary<E, K extends Sortable> {
+	// search for an entry with key KEY and return the object
+	public abstract E search(K key);
 
-	/**
-	 * 
-	 */
-	public Dictionary() {
-		// TODO Auto-generated constructor stub
-	}
+	// insert a key-value pair into the dictionary
+	public abstract void insert(K key, E element);
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	// delete an entry with key KEY
+	public abstract void delete(K key);
 
-	}
+	// print the Dictionary in sorted order (as determined by the keys)
+	public abstract void printTree();
 
+	// return the depth of the underlying tree
+	public abstract int depth();
 }
