@@ -81,28 +81,28 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 		}
 		else if(temp.getKey().compareTo(currNode.getKey()) < 0)
 		{
-			if(currNode.getLeft() == null)
+			if(currNode.getLeft() != null)
 			{
-				currNode.setLeft(temp); 
-				currNode = root;
-			}
-			else if(currNode.getLeft() != null)
-			{ 
 				currNode = currNode.getLeft();
 				insert(key,element);
+			}
+			else
+			{
+				currNode.setLeft(temp);
+				currNode = root;
 			}
 		}
 		else if(temp.getKey().compareTo(currNode.getKey()) > 0)
 		{
-			if(currNode.getRight() == null)
-			{ 
-				currNode.setRight(temp);
-				currNode = root;
-			}
-			else if(currNode.getRight() != null)
+			if(currNode.getRight() != null)
 			{
 				currNode = currNode.getRight();
 				insert(key,element);
+			}
+			else
+			{
+				currNode.setRight(temp);
+				currNode = root;
 			}
 		}
 
