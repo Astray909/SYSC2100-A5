@@ -11,12 +11,12 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	BSTNode<String, SortableString> root;
 	BSTNode<String, SortableString> currNode;
 
-	
+
 	public BSTDictionary()
 	{
 		root = null;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -34,6 +34,12 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	}
 
 	@Override
+	/**
+	 * Search for note from key
+	 * 
+	 * @param Sortable key: the key to be searched
+	 * @return returns null if not found, return element of node as String if found
+	 */
 	public Object search(Sortable key) {
 		if(currNode != null)
 		{
@@ -59,8 +65,46 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	}
 
 	@Override
+	/**
+	 * Insert element to the specific location indicated by the key
+	 * 
+	 * @param Sortable key: the key that indicates where to be inserted
+	 * @param Object element: the element to be inserted
+	 */
 	public void insert(Sortable key, Object element) {
 		// TODO Auto-generated method stub
+		BSTNode<String, SortableString> temp = new BSTNode<String,SortableString>((SortableString)key,(String)element,null,null);
+		if(root == null)
+		{
+			root = temp;
+			currNode = root;
+		}
+		else if(temp.getKey().compareTo(currNode.getKey()) < 0)
+		{
+			if(currNode.getLeft() == null)
+			{
+				currNode.setLeft(temp); 
+				currNode = root;
+			}
+			else if(currNode.getLeft() != null)
+			{ 
+				currNode = currNode.getLeft();
+				insert(key,element);
+			}
+		}
+		else if(temp.getKey().compareTo(currNode.getKey()) > 0)
+		{
+			if(currNode.getRight() == null)
+			{ 
+				currNode.setRight(temp);
+				currNode = root;
+			}
+			else if(currNode.getRight() != null)
+			{
+				currNode = currNode.getRight();
+				insert(key,element);
+			}
+		}
 
 	}
 
