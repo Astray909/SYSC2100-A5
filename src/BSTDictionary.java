@@ -109,9 +109,91 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	}
 
 	@Override
+	/**
+	 * delete the node indicated by the key
+	 * @param Sortable key: the key that indicates which node to delete
+	 */
 	public void delete(Sortable key) {
-		// TODO Auto-generated method stub
+		BSTNode<String,SortableString> parent = null;
+		BSTNode<String,SortableString> del = null;
+		BSTNode<String,SortableString> root = this.root;
+		
+		if(key != null)
+		{
+			while(root != null)
+			{
+				if(key.compareTo(root.getKey()) == 0)
+				{
+					del = root;
+					break;
+				}
+				else if(key.compareTo(root.getKey()) < 0)
+				{
+					parent = root;
+					root = root.getLeft();
+				}
+				else
+				{
+					parent = root;
+					root = root.getRight();
+				}
+			}
+			if(del != null)
+			{
+				if(del.getLeft() == null && del.getRight() == null)
+				{
+					//the delete node does not have 
+					del=null;
+				}
+				else if(del.getLeft() != null && del.getRight() == null)
+				{
+					//the delete node has only one left child
+					if(parent.getRight() == del)
+					{
+						parent.setRight(del.getLeft());
+						del = null;
+					}
+					else
+					{
+						parent.setLeft(del.getLeft());
+						del = null;
+					}
+				}
+				else if(del.getLeft() == null && del.getRight() != null)
+				{
+					//the delete node has only one left child
+					if(parent.getLeft() == del)
+					{
+						parent.setLeft(del.getRight());
+						del = null;
+					}
+					else
+					{
+						parent.setRight(del.getRight());
+						del = null;
+					}
+				}
+				else
+				{
+					//the delete node has two child
+					BSTNode<String,SortableString> temp = findMin(del.getRight());
+					del = temp;
+					temp = null;
+				}
 
+			}
+
+		}
+
+	}
+
+	public BSTNode<String,SortableString> findMin(BSTNode<String,SortableString> node)
+	{
+		while(node.getLeft()!=null)
+		{
+			node = node.getLeft();
+		}
+		return node;
 	}
 
 	@Override
