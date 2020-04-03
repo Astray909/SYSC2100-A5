@@ -115,7 +115,7 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	 */
 	public void delete(Sortable key) {
 		BSTNode<String,SortableString> parent = null;
-		BSTNode<String,SortableString> del = null;
+		BSTNode<String,SortableString> n = null;
 		BSTNode<String,SortableString> root = this.root;
 
 		if(key == null)
@@ -128,7 +128,7 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 		{
 			if(key.compareTo(root.getKey()) == 0)
 			{
-				del = root;
+				n = root;
 				break;
 			}
 			else if(key.compareTo(root.getKey()) < 0)
@@ -143,49 +143,49 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 			}
 		}
 
-		if(del == null)
+		if(n == null)
 		{
 			return;
 		}
 
-		if(del.getLeft() == null && del.getRight() == null)
+		if(n.getLeft() == null && n.getRight() == null)
 		{
-			//the delete node does not have
-			del=null;
+			//has no child
+			n=null;
 		}
-		else if(del.getLeft() != null && del.getRight() == null)
+		else if(n.getLeft() != null && n.getRight() == null)
 		{
-			//the delete node has only one left child
-			if(parent.getRight() == del)
+			//has one left child
+			if(parent.getRight() == n)
 			{
-				parent.setRight(del.getLeft());
-				del = null;
+				parent.setRight(n.getLeft());
+				n = null;
 			}
 			else
 			{
-				parent.setLeft(del.getLeft());
-				del = null;
+				parent.setLeft(n.getLeft());
+				n = null;
 			}
 		}
-		else if(del.getLeft() == null && del.getRight() != null)
+		else if(n.getLeft() == null && n.getRight() != null)
 		{
-			//the delete node has only one right child
-			if(parent.getLeft() == del)
+			//has one right child
+			if(parent.getLeft() == n)
 			{
-				parent.setLeft(del.getRight());
-				del = null;
+				parent.setLeft(n.getRight());
+				n = null;
 			}
 			else
 			{
-				parent.setRight(del.getRight());
-				del = null;
+				parent.setRight(n.getRight());
+				n = null;
 			}
 		}
 		else
 		{
-			//the delete node has two child
-			BSTNode<String,SortableString> temp = findMin(del.getRight());
-			del = temp;
+			//has two children
+			BSTNode<String,SortableString> temp = findMin(n.getRight());
+			n = temp;
 			temp = null;
 		}
 	}
