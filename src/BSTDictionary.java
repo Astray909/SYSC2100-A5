@@ -116,7 +116,8 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	public void delete(Sortable key) {
 		BSTNode<String,SortableString> parent = null;
 		BSTNode<String,SortableString> n = root;
-		
+		BSTNode<String,SortableString> temp = null;
+
 		if(key == null)
 		{
 			System.out.println("The Key is invalid");
@@ -148,13 +149,12 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 
 		else if(n.getLeft() == null && n.getRight() == null)
 		{
-			//has no child
+			//has no child, delete n
 			n=null;
 		}
 		else if(n.getLeft() != null && n.getRight() == null)
 		{
-			//has one left child
-			if(parent.getRight() == n)
+			if(parent.getRight() == n)//has one left child
 			{
 				parent.setRight(n.getLeft());
 				n = null;
@@ -167,8 +167,7 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 		}
 		else if(n.getLeft() == null && n.getRight() != null)
 		{
-			//has one right child
-			if(parent.getLeft() == n)
+			if(parent.getLeft() == n)//has one right child
 			{
 				parent.setLeft(n.getRight());
 				n = null;
@@ -182,9 +181,9 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 		else
 		{
 			//has two children
-			BSTNode<String,SortableString> temp = minvalue(n.getRight());
+			temp = minvalue(n.getRight());
 			n = temp;
-			temp = null;
+			n = null;
 		}
 	}
 
