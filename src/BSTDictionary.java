@@ -115,31 +115,29 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 	 */
 	public void delete(Sortable key) {
 		BSTNode<String,SortableString> parent = null;
-		BSTNode<String,SortableString> n = null;
-		BSTNode<String,SortableString> root = this.root;
-
+		BSTNode<String,SortableString> n = root;
+		
 		if(key == null)
 		{
 			System.out.println("The Key is invalid");
 			return;//return if key is invalid
 		}
 
-		while(root != null)
+		while(n != null)// find the node pointed by key
 		{
-			if(key.compareTo(root.getKey()) == 0)
+			if(key.compareTo(n.getKey()) == 0)
 			{
-				n = root;
 				break;
 			}
-			else if(key.compareTo(root.getKey()) < 0)
+			else if(key.compareTo(n.getKey()) < 0)
 			{
-				parent = root;
-				root = root.getLeft();
+				parent = n;
+				n = n.getLeft();
 			}
-			else if(key.compareTo(root.getKey()) > 0)
+			else if(key.compareTo(n.getKey()) > 0)
 			{
-				parent = root;
-				root = root.getRight();
+				parent = n;
+				n = n.getRight();
 			}
 		}
 
@@ -148,7 +146,7 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 			return;
 		}
 
-		if(n.getLeft() == null && n.getRight() == null)
+		else if(n.getLeft() == null && n.getRight() == null)
 		{
 			//has no child
 			n=null;
@@ -184,19 +182,25 @@ public class BSTDictionary<E, K extends Sortable> implements Dictionary {
 		else
 		{
 			//has two children
-			BSTNode<String,SortableString> temp = findMin(n.getRight());
+			BSTNode<String,SortableString> temp = minvalue(n.getRight());
 			n = temp;
 			temp = null;
 		}
 	}
 
-	public BSTNode<String,SortableString> findMin(BSTNode<String,SortableString> node)
+	/**
+	 * find min value of a sub tree
+	 * @param node: indicates subtree
+	 * @return curr: smallest value
+	 */
+	public BSTNode<String,SortableString> minvalue(BSTNode<String,SortableString> node)
 	{
-		while(node.getLeft()!=null)
+		BSTNode<String,SortableString> curr = node;
+		while(curr.getLeft()!=null)
 		{
-			node = node.getLeft();
+			curr = curr.getLeft();
 		}
-		return node;
+		return curr;
 	}
 
 	@Override
